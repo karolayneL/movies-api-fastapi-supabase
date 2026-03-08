@@ -1,141 +1,195 @@
-# Movies API - Documentação
+# 🎬 Movies API - Documentation
 
-## Descrição
+<div align="center">
 
-API REST para gerenciamento de filmes desenvolvida com FastAPI e Supabase. Oferece operações completas de CRUD (Create, Read, Update, Delete) com autenticação JWT.
+![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)
+![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
+![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens)
+![Render](https://img.shields.io/badge/Render-46E3B7?style=for-the-badge&logo=render&logoColor=white)
+![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white)
 
-## Tecnologias
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
 
-- **Backend**: FastAPI (Python)
-- **Banco de Dados**: Supabase (PostgreSQL)
-- **Autenticação**: JWT via Supabase Auth
-- **Hospedagem**: Render
-- **Testes**: Postman
+**A powerful REST API for movie management with JWT authentication and Supabase integration**
 
-## Estrutura da API
+[Getting Started](#-getting-started) •
+[Features](#-features) •
+[API Endpoints](#-api-endpoints) •
+[Testing Guide](#-testing-guide) •
+[Troubleshooting](#-troubleshooting)
 
-### Endpoints Principais
+</div>
 
-| Método | Endpoint | Descrição | Autenticação |
-|--------|----------|-----------|--------------|
-| GET | `/health` | Status da API | Não |
-| GET | `/movies` | Listar filmes | Sim |
-| GET | `/movies/{id}` | Buscar filme por ID | Sim |
-| POST | `/movies` | Criar novo filme | Sim |
-| PUT | `/movies/{id}` | Atualizar filme | Sim |
-| DELETE | `/movies/{id}` | Deletar filme | Sim |
+---
 
-### Modelo de Dados
+## 📖 Overview
+
+This API provides a complete backend solution for movie catalog management. Built with **FastAPI** for high performance and **Supabase** for robust data persistence, it offers secure authentication and full CRUD operations.
+
+### ✨ Features
+
+- ✅ **Complete CRUD operations** for movies
+- 🔐 **JWT authentication** via Supabase Auth
+- 🚀 **High performance** with FastAPI
+- 🗄️ **PostgreSQL database** managed by Supabase
+- 📊 **Query filtering** and pagination
+- 🧪 **Ready-to-use Postman collections**
+- 🌐 **Hosted on Render** for easy access
+
+---
+
+## 🛠️ Technology Stack
+
+| Layer | Technology | Purpose |
+|-------|------------|---------|
+| **Backend** | FastAPI (Python) | High-performance API framework |
+| **Database** | Supabase (PostgreSQL) | Data persistence & real-time features |
+| **Auth** | Supabase Auth | JWT authentication & user management |
+| **Hosting** | Render | Cloud deployment & scaling |
+| **Testing** | Postman | API testing & documentation |
+
+---
+
+## 📋 API Endpoints
+
+### 🔍 Quick Reference
+
+| Method | Endpoint | Description | Auth Required |
+|:-------|:---------|:------------|:--------------|
+| 🟢 GET | `/health` | Check API status | ❌ No |
+| 🟢 GET | `/movies` | List all movies | ✅ Yes |
+| 🟢 GET | `/movies/{id}` | Get movie by ID | ✅ Yes |
+| 🟡 POST | `/movies` | Create new movie | ✅ Yes |
+| 🟠 PUT | `/movies/{id}` | Update movie | ✅ Yes |
+| 🔴 DELETE | `/movies/{id}` | Delete movie | ✅ Yes |
+
+### 📊 Data Model
 
 ```json
 {
   "id": "uuid",
-  "title": "string",
-  "description": "string", 
-  "release_year": "integer",
-  "duration": "integer",
+  "title": "string (1-200 chars)",
+  "description": "string",
+  "release_year": "integer (1888-current)",
+  "duration": "integer (minutes)",
   "genre": "string",
   "director": "string",
-  "rating": "float",
+  "rating": "float (0-10)",
   "user_id": "uuid",
   "created_at": "timestamp",
   "updated_at": "timestamp"
 }
 ```
 
-## Configuração para Testes
+---
 
-### Pré-requisitos
+## 🚀 Getting Started
 
-- Conta no Postman
-- URL da API hospedada no Render
-- Credenciais do Supabase
+### Prerequisites
 
-### Arquivos Necessários
+- 📬 [Postman](https://www.postman.com/) installed
+- 🔑 Supabase project with `anon_key`
+- 🌐 Render deployment (or local development server)
 
-1. **Environment**: `[PRD] Movies API.postman_environment.json`
-2. **Collections**: 
-   - `User.postman_collection.json` (Autenticação)
-   - `Movies API.postman_collection.json` (Operações de filmes)
+### 📦 Required Files
 
-### Configuração do Environment
+Download these files to get started:
+```
+📁 Postman Collections/
+├── 📄 [PRD] Movies API.postman_environment.json
+├── 📄 User.postman_collection.json
+└── 📄 Movies API.postman_collection.json
+```
 
-No Postman, configure as seguintes variáveis:
+### ⚙️ Environment Setup
 
-| Variável | Valor | Descrição |
-|----------|-------|-----------|
-| `api_url` | `https://seu-app.onrender.com` | URL da API no Render |
-| `supabase_url` | `https://seu-projeto.supabase.co` | URL do Supabase |
-| `api_key` | `sua_chave_anon` | SUPABASE_ANON_KEY |
-| `access_token` | (automático) | Token JWT após login |
-| `user_id` | (automático) | ID do usuário após login |
-| `movie_id` | (automático) | ID do filme criado |
+1. **Import files** into Postman
+2. **Select environment** "[PRD] Movies API"
+3. **Configure variables:**
 
-## Fluxo de Testes
+| Variable | Example Value | Description |
+|----------|---------------|-------------|
+| `api_url` | `https://your-app.onrender.com` | Your deployed API URL |
+| `supabase_url` | `https://xyz.supabase.co` | Your Supabase project URL |
+| `api_key` | `eyJhbGciOiJIUzI1NiIs...` | Your SUPABASE_ANON_KEY |
 
-### Passo 1: Configuração Inicial
+---
 
-1. Importe os arquivos JSON no Postman
-2. Selecione o environment "[PRD] Movies API"
-3. Configure as variáveis `api_url` e `supabase_url` com suas URLs
-4. Configure `api_key` com sua SUPABASE_ANON_KEY
+## 🧪 Testing Guide
 
-### Passo 2: Autenticação (User Collection)
+### 📝 Testing Flow Diagram
 
-1. **Create User** (Opcional)
-   - Cria um novo usuário no Supabase Auth
-   - Use este passo apenas para registrar um novo usuário
+```
+┌─────────────┐
+│   Step 1    │
+│    Setup    │
+└──────┬──────┘
+       ↓
+┌─────────────┐
+│   Step 2    │ ◄─────────────────┐
+│  Sign Up/   │                    │
+│    Login    │                    │
+└──────┬──────┘                    │
+       ↓ (get token & user_id)      │
+┌─────────────┐                    │
+│   Step 3    │                    │
+│  Health     │                    │
+│   Check     │                    │
+└──────┬──────┘                    │
+       ↓                            │
+┌─────────────┐                    │
+│   Step 4    │                    │
+│   Create    │ ───┐ (get movie_id) │
+│    Movie    │    │                │
+└──────┬──────┘    │                │
+       ↓           ↓                │
+┌─────────────┐ ┌─────────────┐     │
+│   Step 5    │ │   Step 6    │     │
+│    Get      │ │   Update    │     │
+│   Movie     │ │    Movie    │     │
+└──────┬──────┘ └──────┬──────┘     │
+       ↓               ↓             │
+┌─────────────┐ ┌─────────────┐     │
+│   Step 7    │ │   Step 8    │     │
+│   Filter    │ │   Delete    │ ────┘
+│   Movies    │ │    Movie    │
+└─────────────┘ └─────────────┘
+```
 
-2. **Login** (Obrigatório)
-   - Executa autenticação e obtém tokens
-   - Armazena automaticamente:
-     - `access_token` para autenticação
-     - `user_id` para criar filmes
-   - **Este passo deve ser executado antes de qualquer operação com filmes**
+### Step-by-Step Testing
 
-### Passo 3: Operações com Filmes (Movies API Collection)
+#### 🎯 Step 1: Health Check
+```bash
+GET {{api_url}}/health
+```
+✅ **Expected**: `{"status": "healthy"}`
 
-#### Health Check
-- **Endpoint**: `GET /health`
-- **Autenticação**: Não requerida
-- **Uso**: Verificar se a API está online
+#### 🔐 Step 2: Authentication
 
-#### Listar Filmes
-- **Endpoint**: `GET /movies`
-- **Parâmetros opcionais**:
-  - `limit`: Limite de resultados (padrão: 50, máximo: 100)
-  - `offset`: Paginação
-  - `genre`: Filtrar por gênero
-  - `director`: Filtrar por diretor  
-  - `min_rating`: Rating mínimo (0-10)
-
-#### Buscar Filme por ID
-- **Endpoint**: `GET /movies/{id}`
-- **Pré-requisito**: `movie_id` deve estar configurado (após criar um filme)
-
-#### Criar Filme
-- **Endpoint**: `POST /movies`
-- **Body**: Incluir todos os campos obrigatórios
-- **Campo importante**: `user_id` deve ser o UUID do usuário autenticado
-- **Após execução**: Armazena automaticamente o `movie_id` criado
-
-#### Atualizar Filme
-- **Endpoint**: `PUT /movies/{id}`
-- **Body**: Apenas campos que serão atualizados
-- **Pré-requisito**: `movie_id` deve estar configurado
-
-#### Deletar Filme  
-- **Endpoint**: `DELETE /movies/{id}`
-- **Pré-requisito**: `movie_id` deve estar configurado
-
-#### Filtrar Filmes
-- Exemplos incluídos para filtros por gênero, diretor e rating
-
-## Exemplos de Uso
-
-### Criar um Filme
-
+**Sign Up** (if needed):
 ```json
+POST {{api_url}}/auth/signup
+{
+  "email": "user@example.com",
+  "password": "SecurePass123"
+}
+```
+
+**Login** (required):
+```json
+POST {{api_url}}/auth/login
+{
+  "email": "user@example.com",
+  "password": "SecurePass123"
+}
+```
+✅ **Success**: Automatically stores `access_token` and `user_id`
+
+#### 🎬 Step 3: Create a Movie
+```json
+POST {{api_url}}/movies
 {
   "title": "Inception",
   "description": "A thief who steals corporate secrets through dream-sharing technology",
@@ -147,53 +201,91 @@ No Postman, configure as seguintes variáveis:
   "user_id": "{{user_id}}"
 }
 ```
+✅ **Success**: Returns movie object with `id` (auto-saved as `movie_id`)
 
-### Atualizar um Filme
+#### 🔍 Step 4: Query with Filters
 
-```json
-{
-  "title": "Inception - Special Edition",
-  "rating": 9.0
-}
+| Filter | Example | Description |
+|--------|---------|-------------|
+| Genre | `?genre=Sci-Fi` | Filter by genre |
+| Rating | `?min_rating=8.5` | Minimum rating |
+| Director | `?director=Nolan` | Filter by director |
+| Pagination | `?limit=10&offset=20` | Paginate results |
+
+**Example:**
+```
+GET {{api_url}}/movies?genre=Sci-Fi&min_rating=8.0&limit=5
 ```
 
-### Filtrar Filmes
+---
 
+## 📊 Postman Collection Details
+
+### User Collection
 ```
-GET /movies?genre=Sci-Fi&min_rating=8.5&limit=10
+📁 User
+├── 📝 Create User (Optional)
+└── 🔑 Login (Required)
 ```
 
-## Validações e Regras
+### Movies API Collection
+```
+📁 Movies API
+├── 🏥 Health Check
+├── 📋 List Movies
+├── 🔍 Get Movie by ID
+├── ➕ Create Movie
+├── 📝 Update Movie
+├── 🗑️ Delete Movie
+└── 🎯 Filter Movies
+    ├── By Genre
+    ├── By Director
+    └── By Minimum Rating
+```
 
-- **Título**: 1-200 caracteres
-- **Ano de lançamento**: 1888 até ano atual
-- **Duração**: Mínimo 1 minuto
-- **Rating**: 0-10
-- **Autenticação**: Token JWT válido necessário para todas as operações (exceto health)
-- **User ID**: Deve ser fornecido ao criar filmes
+---
 
-## Tratamento de Erros
+## 🐛 Troubleshooting
 
-A API retorna códigos HTTP apropriados:
+### Common Issues & Solutions
 
-- `200`: Sucesso
-- `201`: Recurso criado
-- `400`: Dados inválidos
-- `401`: Não autenticado
-- `404`: Recurso não encontrado
-- `500`: Erro interno do servidor
+| Issue | Error | Solution |
+|-------|-------|----------|
+| **Authentication** | `401 Unauthorized` | Run Login again - token expired |
+| **Not Found** | `404 Not Found` | Check if `movie_id` is set correctly |
+| **Invalid Data** | `400 Bad Request` | Verify field validations |
+| **Timeout** | `504 Gateway Timeout` | Render might be sleeping - wait 30s |
+| **Database** | `500 Internal Error` | Check Supabase connection |
 
-## Dicas para Testes
+### Quick Fixes
 
-1. Sempre execute **Cadastro** + **Login** primeiro para obter o token
-2. Use o **Health Check** para verificar conectividade (e "acordar" o Render)
-3. Ao criar um filme, o `movie_id` é salvo automaticamente para uso subsequente
-4. Para testes de atualização e deleção, crie um filme primeiro
-5. Use os filtros para testar diferentes cenários de consulta
+```bash
+# 1. Always start with Login
+POST {{api_url}}/auth/login
 
-## Solução de Problemas
+# 2. Verify your token is set
+# Check Postman → Environment → access_token
 
-- **Erro 401**: Token inválido ou expirado - execute Login novamente
-- **Erro 404**: ID do filme não encontrado - verifique se `movie_id` está correto
-- **Erro 400**: Dados de entrada inválidos - verifique as validações dos campos
-- **Timeout**: Verifique se a URL da API no Render está correta
+# 3. Wake up Render (if asleep)
+GET {{api_url}}/health
+# Wait 30 seconds, then retry
+```
+
+---
+
+## 📈 Best Practices
+
+1. **Always run Login first** before any movie operations
+2. **Use Health Check** to verify API availability
+3. **Create a test movie** before testing updates/deletes
+4. **Check environment variables** if requests fail
+5. **Use filters** to test specific scenarios
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Feel free to:
+- 🐛 Report bugs
+- 💡 Suggest features
+- 🔧 Submit PRs
